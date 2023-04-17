@@ -1,0 +1,25 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "Simple TODO app with no backend and few CSS to train my JS skills",
+  "main": "script/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint script/*.js",
+    "lint:fix": "eslint --fix script/*.js",
+    "lint:output": "eslint --fix script/*.js -o script/linter.index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/programmeur77/todo-app.git"
+  },
+  "author": "Benoît PUECH",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/programmeur77/todo-app/issues"
+  },
+  "homepage": "https://github.com/programmeur77/todo-app#readme",
+  "devDependencies": {
+    "eslint": "^8.38.0"
+  }
+}
