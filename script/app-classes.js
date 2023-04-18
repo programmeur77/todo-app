@@ -4,3 +4,5 @@ export class Task {
     this.task = task;
   }
 }
+
+export const list = document.querySelector('.task-display__list');
