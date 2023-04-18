@@ -4,7 +4,17 @@
  * @date 18/04/2022 - 14:13
  */
 
-import { list } from './app-classes.js';
+import { displaySection, formError, list } from './app-classes.js';
+import { addListenerDeleteBtn } from './app-functions.js';
+
+export function displayFormErrorMessage() {
+  formError.innerText = 'Please fill out the field before submitting';
+}
+
+export function noDataToDisplay() {
+  displaySection.innerHTML =
+    '<p class="task-display__error">No task ATM, please write one :)</p>';
+}
 
 export function displayData(dataToDisplay) {
   dataToDisplay.forEach((data) => {
@@ -21,4 +31,6 @@ export function displayData(dataToDisplay) {
     list.appendChild(listItem);
     listItem.appendChild(deleteBtn);
   });
+
+  addListenerDeleteBtn();
 }
