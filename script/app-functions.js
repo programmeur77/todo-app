@@ -14,7 +14,10 @@ export function isStored() {
   const tasks = localStorage.getItem('currentTasks');
 
   if (tasks == null) return false;
-  else return true;
+  else if (tasks == '[]') {
+    localStorage.removeItem('currentTasks');
+    location.reload();
+  } else return true;
 }
 
 /**
