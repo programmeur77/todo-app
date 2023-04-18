@@ -1,9 +1,6 @@
-import { submitBtn } from './app-classes.js';
 import { addListenerSubmitBtn } from './listeners.js';
 import { getTasks, isStored } from './localStorage-functions.js';
 import { displayData, noDataToDisplay } from './task-view.js';
-
-
 
 const tasks = isStored();
 
