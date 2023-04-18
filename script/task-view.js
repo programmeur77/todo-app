@@ -5,7 +5,7 @@
  */
 
 import { displaySection, formError, list } from './app-classes.js';
-import { addListenerDeleteBtn } from './app-functions.js';
+import { addListenerDeleteBtn } from './listeners.js';
 
 export function displayFormErrorMessage() {
   formError.innerText = 'Please fill out the field before submitting';
