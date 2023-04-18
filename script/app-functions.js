@@ -52,7 +52,6 @@ export function isEmpty(fieldToCheck) {
  * @param {string} dataToPost from input text field from the form
  */
 export function postData(dataToPost) {
-  let id = 0;
   const stored = isStored();
 
   if (!stored) {
@@ -61,7 +60,7 @@ export function postData(dataToPost) {
     localStorage.setItem('currentTasks', JSON.stringify(taskToStore));
   } else {
     const storedTask = getTasks();
-    const newId = getLastTaskId(storedTask);
+    id = getLastTaskId(storedTask);
     const taskToAdd = createNewTask(stored, newId, dataToPost);
     addTask(taskToAdd);
   }
