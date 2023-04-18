@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint script/*.js",
     "lint:fix": "eslint --fix script/*.js",
-    "lint:output": "eslint --fix script/*.js -o script/linter.index.js"
+    "lint:output": "eslint --fix script/*.js -o script/linter.index.js",
+    "jsdoc": "jsdoc script/*.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/programmeur77/todo-app#readme",
   "devDependencies": {
-    "eslint": "^8.38.0"
+    "eslint": "^8.38.0",
+    "jdoc": "^0.2.0"
   }
 }
