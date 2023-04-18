@@ -1,16 +1,17 @@
+import { submitBtn } from './app-classes.js';
 import { getTasks, isEmpty, isStored, postData } from './app-functions.js';
-import { displayData } from './task-view.js';
+import {
+  displayData,
+  displayFormErrorMessage,
+  noDataToDisplay,
+} from './task-view.js';
 
 const text = document.querySelector('.app-form__description-field');
-const submitBtn = document.querySelector('.app-form__post-data-btn');
-const displaySection = document.querySelector('.task-display__section');
-const formError = document.querySelector('.app-form__error');
 
 const tasks = isStored();
 
 if (!tasks) {
-  displaySection.innerHTML =
-    '<p class="task-display__error">No task ATM, please write one :)</p>';
+  noDataToDisplay();
 } else {
   const storedTasks = getTasks();
   displayData(storedTasks);
@@ -21,7 +22,8 @@ submitBtn.addEventListener('click', (event) => {
   const isNotEmpty = isEmpty(text);
   if (isNotEmpty) {
     postData(text.value);
+    location.reload();
   } else {
-    formError.innerText = 'Please fill out the field before submitting';
+    displayFormErrorMessage;
   }
 });
