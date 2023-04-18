@@ -1,12 +1,9 @@
 import { submitBtn } from './app-classes.js';
-import { getTasks, isEmpty, isStored, postData } from './app-functions.js';
-import {
-  displayData,
-  displayFormErrorMessage,
-  noDataToDisplay,
-} from './task-view.js';
+import { addListenerSubmitBtn } from './listeners.js';
+import { getTasks, isStored } from './localStorage-functions.js';
+import { displayData, noDataToDisplay } from './task-view.js';
 
-const text = document.querySelector('.app-form__description-field');
+
 
 const tasks = isStored();
 
@@ -17,13 +14,4 @@ if (!tasks) {
   displayData(storedTasks);
 }
 
-submitBtn.addEventListener('click', (event) => {
-  event.preventDefault();
-  const isNotEmpty = isEmpty(text);
-  if (isNotEmpty) {
-    postData(text.value);
-    location.reload();
-  } else {
-    displayFormErrorMessage;
-  }
-});
+addListenerSubmitBtn();
