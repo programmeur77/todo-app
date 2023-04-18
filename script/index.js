@@ -1,13 +1,25 @@
-import { getTasks } from './app-functions.js';
+import { getTasks, isEmpty, postData } from './app-functions.js';
 
 const text = document.querySelector('.app-form__description-field');
 const submitBtn = document.querySelector('.app-form__post-data-btn');
 const displaySection = document.querySelector('.task-display__section');
+const formError = document.querySelector('.app-form__error');
 
-const tasks = getTasks().then((currentTasks) => {
-  if (currentTasks.length <= 0) {
-    displaySection.innerHTML = `<p class="task-display__error">No task for the moment. Create one :)</p>`;
+const tasks = getTasks();
+
+if (!tasks) {
+  displaySection.innerHTML =
+    '<p class="task-display__error">No task ATM, please write one :)</p>';
+} else {
+  console.log('Comming soon');
+}
+
+submitBtn.addEventListener('click', (event) => {
+  event.preventDefault();
+  const isNotEmpty = isEmpty(text);
+  if (isNotEmpty) {
+    postData(text.value);
   } else {
-    console.log(currentTasks);
+    formError.innerText = 'Please fill out the field before submitting';
   }
 });
