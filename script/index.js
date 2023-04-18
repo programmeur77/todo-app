@@ -1,4 +1,5 @@
-import { isEmpty, isStored, postData } from './app-functions.js';
+import { getTasks, isEmpty, isStored, postData } from './app-functions.js';
+import { displayData } from './task-view.js';
 
 const text = document.querySelector('.app-form__description-field');
 const submitBtn = document.querySelector('.app-form__post-data-btn');
@@ -11,7 +12,8 @@ if (!tasks) {
   displaySection.innerHTML =
     '<p class="task-display__error">No task ATM, please write one :)</p>';
 } else {
-  console.log('Comming soon');
+  const storedTasks = getTasks();
+  displayData(storedTasks);
 }
 
 submitBtn.addEventListener('click', (event) => {
