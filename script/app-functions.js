@@ -6,8 +6,8 @@
 import { Task } from './app-classes.js';
 
 /**
- * Checks if a localStorage entry is present or not
- * @returns {boolean} true if there is a localStorage entry, false if not
+ *  Checks if a localStorage entry is present or not
+ * @returns {boolean} true if entry exists, false if does not
  */
 
 export function isStored() {
@@ -18,10 +18,12 @@ export function isStored() {
 }
 
 /**
- * Get contents from localStorage and returns it
- * @returns localStorage parsed content
+ * Gets data from localStorage and parse it in JSON format
+ * @date 18/04/2023 - 17:58:13
+ *
+ * @export
+ * @returns {Object} array of object containing all stored tasks
  */
-
 export function getTasks() {
   const storedTasks = localStorage.getItem('currentTasks');
   const allTasks = JSON.parse(storedTasks);
@@ -47,7 +49,7 @@ export function isEmpty(fieldToCheck) {
  * @date 18/04/2023 - 13:50:38
  *
  * @export
- * @param {*} dataToPost From input text field from the form
+ * @param {string} dataToPost from input text field from the form
  */
 export function postData(dataToPost) {
   let id = 0;
@@ -59,9 +61,8 @@ export function postData(dataToPost) {
     localStorage.setItem('currentTasks', JSON.stringify(taskToStore));
   } else {
     const storedTask = getTasks();
-    const lastId = getLastTaskId(storedTask);
-    id = lastId + 1;
-    const taskToAdd = createNewTask(stored, id, dataToPost);
+    const newId = getLastTaskId(storedTask);
+    const taskToAdd = createNewTask(stored, newId, dataToPost);
     addTask(taskToAdd);
   }
 }
@@ -70,9 +71,9 @@ export function postData(dataToPost) {
  * Creates a new task according to Task class constructor according to presence or not of localStorage entry
  * @date 18/04/2023 - 13:53:04
  *
- * @param {boolean} isStored
- * @param {number} taskId
- * @param {string} taskContent
+ * @param {boolean} isStored localStorage already exists if true, doesn't if false
+ * @param {number} taskId task ID number to store
+ * @param {string} taskContent task content to store
  * @returns {object} Containing the new task according to the Task Class constructor
  */
 function createNewTask(isStored, taskId, taskContent) {
@@ -88,21 +89,12 @@ function createNewTask(isStored, taskId, taskContent) {
  * This function gets last task id number got in the task array taken from localStorage
  * @date 18/04/2023 - 13:55:10
  *
- * @param {*} taskArray
- * @returns {number}
+ * @param {Array} taskArray array of all the stored tasks
+ * @returns {number} new ID number
  */
 function getLastTaskId(taskArray) {
-  let lastTaskId = 0;
-  const objectValues = Object.values(taskArray);
-  const lastStoredTask = objectValues.filter((taskId) => {
-    return taskId.id == objectValues.length;
-  });
-
-  lastStoredTask.forEach((task) => {
-    lastTaskId = task.id;
-  });
-
-  return lastTaskId;
+  const lastTask = taskArray.pop();
+  return lastTask.id + 1;
 }
 
 /**
@@ -116,4 +108,40 @@ function addTask(taskToAdd) {
   actualTasks = [...actualTasks, taskToAdd];
 
   localStorage.setItem('currentTasks', JSON.stringify(actualTasks));
+}
+
+/**
+ * Add listeners on each "Delete" button that were dynamicly created
+ * @date 18/04/2023 - 17:52:14
+ *
+ * @export
+ */
+export function addListenerDeleteBtn() {
+  const deleteBtn = document.querySelectorAll('.task-display__delete-item');
+
+  for (let i = 0; i < deleteBtn.length; i++) {
+    deleteBtn[i].addEventListener('click', async (event) => {
+      const currentId = event.target.parentElement.dataset.id;
+      deleteTask(currentId);
+    });
+  }
+}
+
+/**
+ * Delete a task in the storage array and re-set the updated task array in the storage
+ * @date 18/04/2023 - 17:53:03
+ *
+ * @param {number} taskId ID number of task to delete
+ */
+function deleteTask(taskId) {
+  const allTasks = getTasks();
+
+  for (let i = allTasks.length - 1; i >= 0; i--) {
+    if (allTasks[i].id == taskId) {
+      allTasks.splice(i, 1);
+    }
+  }
+  const TasksUpdated = allTasks;
+  localStorage.setItem('currentTasks', JSON.stringify(TasksUpdated));
+  location.reload();
 }
