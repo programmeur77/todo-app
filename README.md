@@ -1,1 +1,1 @@
-Simple TODO app with almost no CSS and no backend - just a JSON file to POST and GET data. This project was made just to train my JS.
+Simple TODO app with almost no CSS and no backend. Data are only stored in localStorage and modified from there. This project is to train my JS skills.
