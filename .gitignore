@@ -4,3 +4,4 @@ package-lock.json
 node_modules
 out/
 jsdoc-conf.json
+config/
