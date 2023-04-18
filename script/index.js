@@ -1,11 +1,11 @@
-import { getTasks, isEmpty, postData } from './app-functions.js';
+import { isEmpty, isStored, postData } from './app-functions.js';
 
 const text = document.querySelector('.app-form__description-field');
 const submitBtn = document.querySelector('.app-form__post-data-btn');
 const displaySection = document.querySelector('.task-display__section');
 const formError = document.querySelector('.app-form__error');
 
-const tasks = getTasks();
+const tasks = isStored();
 
 if (!tasks) {
   displaySection.innerHTML =
